@@ -12,6 +12,7 @@ import java.util.List;
 @Service
 public class CourseService {
 
+
 	private CourseRepository courseRepository;
 
     private static final List<String> SEARCHABLE_FIELDS = Arrays.asList("name","hours");
@@ -36,7 +37,6 @@ public class CourseService {
     
     public List<Course> searchCoursesWithTotalHours(String text, List<String> fields, int limit) {
     	List<Course> searchedCourses = searchCourses(text, fields, limit);
-    	// add logic for total of courses
     	return searchedCourses;
     }
     

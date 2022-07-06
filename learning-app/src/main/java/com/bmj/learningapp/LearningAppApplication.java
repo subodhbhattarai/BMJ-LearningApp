@@ -47,7 +47,7 @@ public class LearningAppApplication {
             for (Course course : courseRepository.findAll()) {
               log.info(course.toString());
             }
-            log.info(" COURSE LISTED ABOVE");
+            log.info(" COURSES LISTED ABOVE");
         };
     }
 	

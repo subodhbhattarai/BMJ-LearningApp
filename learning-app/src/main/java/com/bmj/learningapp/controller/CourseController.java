@@ -64,10 +64,18 @@ public class CourseController {
         //return 
         List<Course> searchedCourses = new ArrayList<Course>();
         searchedCourses = courseService.searchCoursesWithTotalHours(searchRequestDTO.getText(), searchRequestDTO.getFields(), searchRequestDTO.getLimit());
+        // add logic for total of courses
+    	double total = 0; 
+    	for (Course course : searchedCourses) {
+    		total = total + Double.parseDouble(course.getHours());
+    	}
+    	String totalS = String.format("%.0f", total);
+    	HttpHeaders httpHeaders = new HttpHeaders();
+    	httpHeaders.add("Total", "/api/search/total" + totalS);
         if (searchedCourses.isEmpty()) {
         	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(searchedCourses, HttpStatus.OK);
+        return new ResponseEntity<>(searchedCourses, httpHeaders, HttpStatus.OK);
     }
     
     @GetMapping("/courses")
