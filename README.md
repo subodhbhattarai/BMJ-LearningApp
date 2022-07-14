@@ -1,5 +1,5 @@
 # BMJ-LearningApp
-A SpringBoot restful web application in Java 11 
+A SpringBoot restful web application in Java 11 with Maven, H2 db, Hibernate with Lucene.
 
 
 The application exposes two endpoints, which should function as follows:
@@ -28,3 +28,35 @@ Data:
 "2.00,Airways management: tracheal intubation",
 "2.50,Quick tips: proning in critical care",
 "3.0,Quick tips: introduction to asthma"
+
+To run the application via command line or IDE as:
+
+      mvn spring-boot:run
+
+      - Application is available on port 8080 and accessible via: 
+            
+            localhost:8080
+
+To access the H2-console:
+      
+      localhost:8080/h2-console
+      
+      - The name of the db is generated during application start (mvn spring-boot run) and captured from the start-up logs.
+
+To test the endpoints using cURL or Postman:
+
+      - Entity:Course consists of 2 data: name and hours
+      - DTO: SearchRequest consists of 3 request params: text, fields, limit
+
+            text - accepts (multiple) the search pattern
+            fields - accepts (multiple) fields where "text" is to be searched
+            limit - displays the maximum number of possible results after the search is completed
+
+      GET localhost:8080/api/search?text=Introduction&fields=name&limit=10 (search courses)
+      GET localhost:8080/api/search/total?text=pointers&fields=name&limit=5 (search courses with total hours)
+      
+      - Bonus endpoints:
+      GET localhost:8080/api/courses (for all courses)
+      GET localhost:8080/api/courses/{id} (for course with courseId)
+      POST localhost:8080/api/courses (to create a new course)
+            - JSON body: { "name" : "New course", "hours" : "1.5" }
